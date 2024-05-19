@@ -108,6 +108,7 @@ export const Navbar = async () => {
                                     size="icon"
                                     className="rounded-full"
                                 >
+                                
                                     <span className="sr-only">Toggle user menu</span>
                                 </Button>
                             </DropdownMenuTrigger>
@@ -125,10 +126,10 @@ export const Navbar = async () => {
                         </DropdownMenu>
                     ) : (
                         <Link
-                        href={"/api/auth/login"}
+                            href={"/api/auth/login"}
                             className={buttonVariants()}
                         >
-                        Login
+                            Login
                             <span className="sr-only">Login</span>
                         </Link>
                     )}
