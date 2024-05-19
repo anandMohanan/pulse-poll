@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { useMutation } from "@tanstack/react-query"
@@ -25,7 +25,6 @@ export const SignupForm = () => {
         }
     })
     const { toast } = useToast()
-    const router = useRouter()
     const { mutate: createAccount, isPending: createAccountPending } = useMutation({
         mutationFn: async (values: SignupFormType) => {
             await SignupUserAction({ formData: values })
@@ -54,7 +53,7 @@ export const SignupForm = () => {
         createAccount(values)
     }
     return (
-        <div className="flex items-center justify-center min-h-screen">
+        <div className="flex items-center justify-center h-screen">
             <Link
                 href="/"
                 className={cn(
@@ -123,11 +122,14 @@ export const SignupForm = () => {
                                         )}
                                     />
                                 </div>
-                                <Button type="submit">{createAccountPending ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}Submit</Button>
+                                <Button type="submit">{createAccountPending ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}Create Account</Button>
                             </div>
                         </form>
                     </Form>
                 </CardContent>
+                <CardFooter>
+                    Already have an account? <Link href="/signin" className={cn(buttonVariants({ variant: "link" }))}>Sign in</Link>
+                </CardFooter>
             </Card>
         </div>
     )

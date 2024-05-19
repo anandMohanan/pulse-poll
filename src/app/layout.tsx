@@ -25,11 +25,8 @@ export default function RootLayout({
             <body className={cn(inter.className, "flex flex-col min-h-screen")}>
                 <ReactQueryClientProvider>
                     <ThemeProvider attribute="class">
-                    <Navbar />
-                        <MaxWidthWrapper>
-                            {children}
-                            <Toaster />
-                        </MaxWidthWrapper>
+                        {children}
+                        <Toaster />
                     </ThemeProvider>
                 </ReactQueryClientProvider>
             </body>

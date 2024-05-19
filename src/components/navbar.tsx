@@ -6,6 +6,7 @@ import {
     Menu,
     Package2,
     Search,
+    VoteIcon,
 } from "lucide-react";
 
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -19,41 +20,35 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ThemeToggle } from "./theme-toggle";
-import Image from "next/image";
 import { validateRequest } from "@/lib/validateRequest";
-import { Livvic } from "next/font/google";
+import { Avatar, AvatarFallback } from "./ui/avatar";
+import { LogoutComponent } from "./logout";
 
 export const Navbar = async () => {
     const { user } = await validateRequest()
     return (
         <div className="z-100">
-            <header className="sticky top-0 flex h-16 items-center gap-4 border-b px-4 md:px-6">
+            <header className="sticky top-0 flex h-16 items-center gap-4  px-4 md:px-6">
                 <nav className="flex md:w-full items-center justify-between ">
                     <div className="hidden lg:flex gap-3 lg:flex-4">
                         <Link href={"/"} className=" text-lg font-semibold md:text-base">
-                            <Cable className="h-6 w-6" />
+                            <VoteIcon className="h-6 w-6" />
                             <span className="sr-only">Resume Sync</span>
                         </Link>
                         <div className="w-10 opacity-0 "></div>
                     </div>
                     <div className="hidden lg:flex m-auto   lg:gap-x-6">
                         <Link
-                            href={`/resume/${user?.id}`}
+                            href={`/polls`}
                             className="text-muted-foreground lg:ml-3 transition-colors hover:text-foreground"
                         >
-                            Resume
+                            Polls
                         </Link>
                         <Link
-                            href={`/track/${user?.id}`}
+                            href={`/pricing`}
                             className="text-muted-foreground transition-colors hover:text-foreground"
                         >
-                            Track
-                        </Link>
-                        <Link
-                            href="/"
-                            className="text-muted-foreground transition-colors "
-                        >
-                            Community<span className="text-red-200 text-sm">soon </span>
+                            Pricing
                         </Link>
                     </div>
                 </nav>
@@ -74,26 +69,20 @@ export const Navbar = async () => {
                                 href="/"
                                 className="flex items-center gap-2 text-lg font-semibold"
                             >
-                                <Cable className="h-6 w-6" />
+                                <VoteIcon className="h-6 w-6" />
                                 <span className="sr-only">Resume Sync</span>
                             </Link>
                             <Link
-                                href={`/resume/${user?.id}`}
+                                href={`/polls`}
                                 className="text-muted-foreground hover:text-foreground"
                             >
-                                Resume
+                                Polls
                             </Link>
                             <Link
-                                href={`/track/${user?.id}`}
+                                href={`/pricing`}
                                 className="text-muted-foreground hover:text-foreground"
                             >
-                                Track
-                            </Link>
-                            <Link
-                                href="/"
-                                className="text-muted-foreground hover:text-foreground"
-                            >
-                                Community<span className="text-red-200 text-sm">Soon </span>
+                                Pricing
                             </Link>
                         </nav>
                     </SheetContent>
@@ -108,30 +97,34 @@ export const Navbar = async () => {
                                     size="icon"
                                     className="rounded-full"
                                 >
-                                
+                                    <Avatar>
+                                        <AvatarFallback>{user.username[0].toUpperCase()}{user.username[1].toUpperCase()} </AvatarFallback>
+                                    </Avatar>
+
                                     <span className="sr-only">Toggle user menu</span>
                                 </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">
-                                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                                <DropdownMenuSeparator />
-                                <DropdownMenuItem>Settings</DropdownMenuItem>
-                                <DropdownMenuItem>Support</DropdownMenuItem>
+                                <DropdownMenuLabel>{user.username} </DropdownMenuLabel>
+                                <DropdownMenuItem>Profile</DropdownMenuItem>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuItem>
                                     {" "}
-                                    <Link href="/api/auth/logout">Logout</Link>
+                                    <LogoutComponent />
                                 </DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>
                     ) : (
-                        <Link
-                            href={"/api/auth/login"}
-                            className={buttonVariants()}
-                        >
-                            Login
-                            <span className="sr-only">Login</span>
-                        </Link>
+                        <>
+                            <Link
+                                href={"/signin"}
+                                className={buttonVariants({ size: "sm" })}
+
+                            >
+                                Sign In
+                                <span className="sr-only">Login</span>
+                            </Link>
+                        </>
                     )}
                 </div>
             </header>

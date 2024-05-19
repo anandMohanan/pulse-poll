@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { useMutation } from "@tanstack/react-query"
@@ -102,11 +102,14 @@ export const SigninForm = () => {
                                         )}
                                     />
                                 </div>
-                                <Button type="submit" >{signInPending ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}Submit</Button>
+                                <Button type="submit" >{signInPending ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}Sign In</Button>
                             </div>
                         </form>
                     </Form>
                 </CardContent>
+                <CardFooter>
+                    Don't have an account? <Link href="/signup" className={cn(buttonVariants({ variant: "link" }))}>Sign up</Link>
+                </CardFooter>
             </Card>
         </div>
     )

@@ -4,6 +4,7 @@ import { db } from "@/db";
 import { UserTable } from "@/db/schema/user_schema";
 import { lucia } from "@/lib/lucia";
 import { zodIssuesFormatter } from "@/lib/utils";
+import { validateRequest } from "@/lib/validateRequest";
 import { SigninFormType, SignupFormType, signInSchema, signUpSchema } from "@/types/user_types";
 import { hash, verify } from "@node-rs/argon2";
 import { eq } from "drizzle-orm";
@@ -92,5 +93,20 @@ export const SigninUserAction = async ({ formData }: { formData: SigninFormType 
         if (redirectPath) {
             redirect(redirectPath)
         }
+    }
+};
+
+
+export const SignoutUserAction = async () => {
+    try{
+    const { session } = await validateRequest()
+    await lucia.invalidateSession(session.id)
+    const sessionCookie = lucia.createBlankSessionCookie();
+    cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+    }catch(e){
+        throw new Error(e.message)
+    }
+    finally {
+        redirect("/")
     }
 };
