@@ -106,7 +106,7 @@ export const Navbar = async () => {
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">
                                 <DropdownMenuLabel>{user.username} </DropdownMenuLabel>
-                                <DropdownMenuItem>Profile</DropdownMenuItem>
+                                <DropdownMenuItem><Link href={"/profile"}>Profile</Link></DropdownMenuItem>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuItem>
                                     {" "}

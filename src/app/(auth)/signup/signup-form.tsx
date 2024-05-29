@@ -122,7 +122,7 @@ export const SignupForm = () => {
                                         )}
                                     />
                                 </div>
-                                <Button type="submit">{createAccountPending ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}Create Account</Button>
+                                <Button type="submit" disabled={createAccountPending}>{createAccountPending ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}Create Account</Button>
                             </div>
                         </form>
                     </Form>

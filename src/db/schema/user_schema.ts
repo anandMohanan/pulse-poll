@@ -2,6 +2,7 @@ import { createId } from "@paralleldrive/cuid2";
 import { sql } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { PlanTable } from "./plan_schema";
+import { PollTable } from "./poll_schema";
 
 export const UserTable = sqliteTable("users", {
     id: text("user_id").notNull().primaryKey().$defaultFn(() => createId()),
@@ -22,4 +23,15 @@ export const SessionsTable = sqliteTable("sessions", {
         .notNull()
         .references(() => UserTable.id),
     expiresAt: integer("expires_at").notNull()
+})
+
+
+export const UserBookmarks = sqliteTable("user_bookmarks", {
+    bookmarkId: text("bookmark_id").notNull().primaryKey().$defaultFn(() => createId()),
+    userId: text("user_id")
+        .notNull()
+        .references(() => UserTable.id),
+    pollId: text("poll_id")
+        .notNull()
+        .references(() => PollTable.pollId),
 })

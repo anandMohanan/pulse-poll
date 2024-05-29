@@ -102,7 +102,7 @@ export const SigninForm = () => {
                                         )}
                                     />
                                 </div>
-                                <Button type="submit" >{signInPending ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}Sign In</Button>
+                                <Button type="submit" disabled={signInPending} >{signInPending ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}Sign In</Button>
                             </div>
                         </form>
                     </Form>

@@ -98,12 +98,12 @@ export const SigninUserAction = async ({ formData }: { formData: SigninFormType 
 
 
 export const SignoutUserAction = async () => {
-    try{
-    const { session } = await validateRequest()
-    await lucia.invalidateSession(session.id)
-    const sessionCookie = lucia.createBlankSessionCookie();
-    cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
-    }catch(e){
+    try {
+        const { session } = await validateRequest()
+        await lucia.invalidateSession(session.id)
+        const sessionCookie = lucia.createBlankSessionCookie();
+        cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+    } catch (e) {
         throw new Error(e.message)
     }
     finally {
