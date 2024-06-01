@@ -7,6 +7,8 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
 import { useToast } from "@/components/ui/use-toast"
 import { SelectComment } from "@/db/schema/poll_schema"
+import { primary_font, secondary_font } from "@/lib/font"
+import { cn } from "@/lib/utils"
 import { commentPollAction, deleteCommentAction } from "@/server/poll"
 import { useMutation } from "@tanstack/react-query"
 import { Loader2, TrashIcon } from "lucide-react"
@@ -57,23 +59,23 @@ export const PollCommentsComponent = ({ pollId, comments }: { pollId: string, co
     return (
         <Card className="w-[500px]">
             <CardHeader>
-                <CardTitle>Comments</CardTitle>
-                <CardDescription>Add a comment</CardDescription>
-                <div className="flex gap-2 ">
+                <CardTitle className={cn(primary_font.className)}>Comments</CardTitle>
+                <CardDescription className={cn(secondary_font.className)}>Add a comment</CardDescription>
+                <div className={cn("flex gap-2 ", secondary_font.className)}>
                     <Input placeholder="Add a comment" value={comment} onChange={(e) => setComment(e.target.value)} className="w-full" />
                     <Button variant="default" disabled={isCommenting} onClick={() => commentPoll()}>{isCommenting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}Post</Button>
                 </div>
             </CardHeader>
             <CardContent>
                 <ScrollArea className="h-[200px]">
-                    <div className="flex flex-col gap-2">
+                    <div className={cn("flex flex-col gap-2")}>
                         {
                             comments?.map((comment) => (
                                 <div key={comment.commentId} className="flex flex-col">
                                     <div className="flex justify-between">
                                         <div>
-                                            <h3 className="font-bold">{comment.username}</h3>
-                                            <p key={comment.commentId}>{comment.comment}</p>
+                                            <h3 className={cn("font-bold", primary_font.className)}>{comment.username}</h3>
+                                            <p key={comment.commentId} className={cn("text-sm", secondary_font.className)}>{comment.comment}</p>
                                         </div>
                                         <Button variant="ghost" disabled={isDeleting} onClick={() => deleteComment({ commentId: comment.commentId })} size="icon"><TrashIcon className="h-4 w-4" /></Button>
                                     </div>

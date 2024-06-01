@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { useToast } from "@/components/ui/use-toast"
 import { SelectPoll } from "@/db/schema/poll_schema"
+import { primary_font, secondary_font } from "@/lib/font"
+import { cn } from "@/lib/utils"
 import { dislikePollAction, likePollAction } from "@/server/poll"
 import { useMutation } from "@tanstack/react-query"
 import { BookmarkIcon, ThumbsDown, ThumbsUp } from "lucide-react"
@@ -61,19 +63,17 @@ export const PollComponent = ({ pollData }: { pollData: { pollId: string, pollTi
         <Card className="w-[500px]">
             <CardHeader className="flex flex-row justify-between align-middle">
                 <div>
-                    <CardTitle>{pollData.pollTitle}</CardTitle>
-                    <CardDescription>{pollData.pollDescription}</CardDescription>
+                    <CardTitle className={cn(primary_font.className)}>{pollData.pollTitle}</CardTitle>
+                    <CardDescription className={cn(secondary_font.className)}>{pollData.pollDescription}</CardDescription>
                 </div>
                 <Button variant="outline" size="icon"><BookmarkIcon className="w-4 h-4" /></Button>
             </CardHeader>
-            <CardContent>
-            </CardContent>
             <CardFooter className="flex justify-between">
                 <div>
                     <Button variant="ghost" size={"icon"} onClick={() => likePoll()}><ThumbsUp className="text-green-300" /></Button>
                     <Button variant={"ghost"} size={"icon"} onClick={() => dislikePoll()}><ThumbsDown className="text-red-300" /></Button>
                 </div>
-                <div>
+                <div className={cn(secondary_font.className)}>
                     <p>{pollData.createdUser}: {pollData.createdAt} </p>
                 </div>
             </CardFooter>

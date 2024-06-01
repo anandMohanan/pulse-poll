@@ -7,6 +7,8 @@ import { ProfilePollComponent } from "./profile-poll";
 import { get_profilePollDetails } from "@/server/queries/poll_queries";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { get_userProfileDetails } from "@/server/queries/user_queries";
+import { primary_font, secondary_font } from "@/lib/font";
+import { cn } from "@/lib/utils";
 
 const ProfilePage = async () => {
     const { user } = await validateRequest()
@@ -17,21 +19,21 @@ const ProfilePage = async () => {
             <Card className="">
                 <CardHeader className="flex flex-row justify-between align-middle">
                     <div className="flex flex-col">
-                        <CardTitle className="text-3xl">{user?.username}</CardTitle>
-                        <CardDescription className=" text-lg text-yellow-300">Plan ID: {user?.planId == "1" ? "Free" : "Premium"}</CardDescription>
+                        <CardTitle className={cn("text-3xl", primary_font.className)}>{user?.username}</CardTitle>
+                        <CardDescription className={cn(" text-lg text-yellow-300", secondary_font.className)}>Plan ID: {user?.planId == "1" ? "Free" : "Premium"}</CardDescription>
                     </div>
                     <div className="flex flex-col gap-2">
                         <div className="flex gap-2">
-                            <CardTitle className="">Number of polls:</CardTitle>
-                            <CardDescription className="text-yellow-300">{userProfileDetails?.pollCounts}</CardDescription>
+                            <CardTitle className={cn("", primary_font.className)}>Number of polls:</CardTitle>
+                            <CardDescription className={cn("text-yellow-300", secondary_font.className)}>{userProfileDetails?.pollCounts}</CardDescription>
                         </div>
                         <div className="flex gap-2">
-                            <CardTitle className="">Likes:</CardTitle>
-                            <CardDescription className="text-yellow-300">{userProfileDetails?.pollLikes}</CardDescription>
+                            <CardTitle className={cn("", primary_font.className)}>Likes:</CardTitle>
+                            <CardDescription className={cn("text-yellow-300", secondary_font.className)}>{userProfileDetails?.pollLikes}</CardDescription>
                         </div>
                         <div className="flex gap-2">
-                            <CardTitle className="">Dislikes:</CardTitle>
-                            <CardDescription className="text-yellow-300">{userProfileDetails?.pollDislikes}</CardDescription>
+                            <CardTitle className={cn("", primary_font.className)}>Dislikes:</CardTitle>
+                            <CardDescription className={cn("text-yellow-300", secondary_font.className)}>{userProfileDetails?.pollDislikes}</CardDescription>
                         </div>
                     </div>
                 </CardHeader>
@@ -42,7 +44,6 @@ const ProfilePage = async () => {
         <Tabs defaultValue="account" className="">
             <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="posts"> Your Polls</TabsTrigger>
-                <TabsTrigger value="bookmarks">Bookmarks</TabsTrigger>
             </TabsList>
             <TabsContent value="posts">
                 <div className="grid md:grid-cols-3 grid-cols-1 gap-4">

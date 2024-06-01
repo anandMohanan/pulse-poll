@@ -22,9 +22,9 @@ export const FooterComponent = () => {
                             </div>
                             <div className='flex flex-col gap-2'>
                                 <h3 className={cn('mb-2 uppercase text-[#ffffff80]', primary_font.className)} > Company</h3>
-                                <Link href={"/"} className={cn(secondary_font.className)}>About</Link>
-                                <Link href={"/"} className={cn(secondary_font.className)}>Manifesto</Link>
-                                <Link href={"/"} className={cn(secondary_font.className)}>Github</Link>
+                                <Link href={"/"} className={cn(secondary_font.className)} >About</Link>
+                                <Link href={"/manifesto"} className={cn(secondary_font.className)}>Manifesto</Link>
+                                <Link href={"https://github.com/anandMohanan/pulse-poll"} className={cn(secondary_font.className)}>Github</Link>
                             </div>
                         </div>
                     </div>

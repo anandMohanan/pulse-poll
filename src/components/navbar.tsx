@@ -23,17 +23,19 @@ import { ThemeToggle } from "./theme-toggle";
 import { validateRequest } from "@/lib/validateRequest";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import { LogoutComponent } from "./logout";
+import { cn } from "@/lib/utils";
+import { primary_font } from "@/lib/font";
 
 export const Navbar = async () => {
     const { user } = await validateRequest()
     return (
-        <div className="z-100">
+        <div className={cn("z-100", primary_font.className)}>
             <header className="sticky top-0 flex h-16 items-center gap-4  px-4 md:px-6">
                 <nav className="flex md:w-full items-center justify-between ">
                     <div className="hidden lg:flex gap-3 lg:flex-4">
                         <Link href={"/"} className=" text-lg font-semibold md:text-base">
                             <VoteIcon className="h-6 w-6" />
-                            <span className="sr-only">Resume Sync</span>
+                            <span className="sr-only">Pulse Poll</span>
                         </Link>
                         <div className="w-10 opacity-0 "></div>
                     </div>
